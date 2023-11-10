@@ -1,0 +1,120 @@
+CREATE TABLE Categorias (
+ CategoriaID INT NOT NULL,
+ Nome CHAR(100)
+);
+
+ALTER TABLE Categorias ADD CONSTRAINT PK_Categorias PRIMARY KEY (CategoriaID);
+
+
+CREATE TABLE Pedido (
+ PedidoID INT NOT NULL,
+ ValorTotal FLOAT(10),
+ QuatItens INT
+);
+
+ALTER TABLE Pedido ADD CONSTRAINT PK_Pedido PRIMARY KEY (PedidoID);
+
+
+CREATE TABLE Usuario (
+ UsuarioID INT NOT NULL,
+ Nome CHAR(10),
+ CPF INT,
+ E-mail CHAR(10),
+ NomeUsuario CHAR(10),
+ Senha VARCHAR(10)
+);
+
+ALTER TABLE Usuario ADD CONSTRAINT PK_Usuario PRIMARY KEY (UsuarioID);
+
+
+CREATE TABLE Campos (
+ CampoID INT NOT NULL,
+ CategoriaID INT NOT NULL,
+ Nome CHAR(100)
+);
+
+ALTER TABLE Campos ADD CONSTRAINT PK_Campos PRIMARY KEY (CampoID,CategoriaID);
+
+
+CREATE TABLE Endereco (
+ PedidoID INT NOT NULL,
+ UsuarioID INT NOT NULL,
+ UsuarioID_0 INT NOT NULL,
+ PedidoID_0 INT NOT NULL
+);
+
+ALTER TABLE Endereco ADD CONSTRAINT PK_Endereco PRIMARY KEY (PedidoID,UsuarioID,UsuarioID_0,PedidoID_0);
+
+
+CREATE TABLE Pecas (
+ PecaID INT NOT NULL,
+ CategoriaID INT NOT NULL,
+ Nome VARCHAR(100),
+ Imagem CHAR(200),
+ Preco FLOAT,
+ Link CHAR(1000),
+ Estoque INT,
+ EstadoEstoque BIT(2)
+);
+
+ALTER TABLE Pecas ADD CONSTRAINT PK_Pecas PRIMARY KEY (PecaID,CategoriaID);
+
+
+CREATE TABLE PecasCampos (
+ PecaCampoID INT NOT NULL,
+ PecaID INT NOT NULL,
+ CategoriaID INT NOT NULL,
+ CampoID INT NOT NULL,
+ DadoCampo CHAR(100),
+ Descricao CHAR(10)
+);
+
+ALTER TABLE PecasCampos ADD CONSTRAINT PK_PecasCampos PRIMARY KEY (PecaCampoID,PecaID,CategoriaID,CampoID);
+
+
+CREATE TABLE Estoque (
+ PedidoID INT NOT NULL,
+ PecaID INT NOT NULL,
+ ItemEstoqueID INT NOT NULL,
+ CatItemEstoqueID CHAR(10) NOT NULL,
+ CategoriaID INT NOT NULL,
+ Estante VARCHAR(10),
+ Estado BIT(2)
+);
+
+ALTER TABLE Estoque ADD CONSTRAINT PK_Estoque PRIMARY KEY (PedidoID,PecaID,ItemEstoqueID,CatItemEstoqueID,CategoriaID);
+
+
+CREATE TABLE Estoque_99 (
+ PedidoID INT NOT NULL,
+ PecaID INT NOT NULL,
+ CategoriaID INT NOT NULL
+);
+
+ALTER TABLE Estoque_99 ADD CONSTRAINT PK_Estoque_99 PRIMARY KEY (PedidoID,PecaID,CategoriaID);
+
+
+ALTER TABLE Campos ADD CONSTRAINT FK_Campos_0 FOREIGN KEY (CategoriaID) REFERENCES Categorias (CategoriaID);
+
+
+ALTER TABLE Endereco ADD CONSTRAINT FK_Endereco_0 FOREIGN KEY (PedidoID) REFERENCES Pedido (PedidoID);
+ALTER TABLE Endereco ADD CONSTRAINT FK_Endereco_1 FOREIGN KEY (UsuarioID) REFERENCES Usuario (UsuarioID);
+ALTER TABLE Endereco ADD CONSTRAINT FK_Endereco_2 FOREIGN KEY (UsuarioID_0) REFERENCES Usuario (UsuarioID);
+ALTER TABLE Endereco ADD CONSTRAINT FK_Endereco_3 FOREIGN KEY (PedidoID_0) REFERENCES Pedido (PedidoID);
+
+
+ALTER TABLE Pecas ADD CONSTRAINT FK_Pecas_0 FOREIGN KEY (CategoriaID) REFERENCES Categorias (CategoriaID);
+
+
+ALTER TABLE PecasCampos ADD CONSTRAINT FK_PecasCampos_0 FOREIGN KEY (PecaID,CategoriaID) REFERENCES Pecas (PecaID,CategoriaID);
+ALTER TABLE PecasCampos ADD CONSTRAINT FK_PecasCampos_1 FOREIGN KEY (CampoID,CategoriaID) REFERENCES Campos (CampoID,CategoriaID);
+
+
+ALTER TABLE Estoque ADD CONSTRAINT FK_Estoque_0 FOREIGN KEY (PedidoID) REFERENCES Pedido (PedidoID);
+ALTER TABLE Estoque ADD CONSTRAINT FK_Estoque_1 FOREIGN KEY (PecaID,CategoriaID) REFERENCES Pecas (PecaID,CategoriaID);
+
+
+ALTER TABLE Estoque_99 ADD CONSTRAINT FK_Estoque_99_0 FOREIGN KEY (PedidoID) REFERENCES Pedido (PedidoID);
+ALTER TABLE Estoque_99 ADD CONSTRAINT FK_Estoque_99_1 FOREIGN KEY (PecaID,CategoriaID) REFERENCES Pecas (PecaID,CategoriaID);
+
+
