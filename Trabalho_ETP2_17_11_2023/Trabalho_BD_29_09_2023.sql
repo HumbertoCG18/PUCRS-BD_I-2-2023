@@ -41,6 +41,15 @@ CREATE TABLE Pedido (
 
 ALTER TABLE Pedido ADD CONSTRAINT PK_Pedido PRIMARY KEY (PedidoID);
 
+CREATE TRIGGER RegistroPedido
+AFTER INSERT ON Pedidos
+FOR EACH ROW
+BEGIN
+    INSERT INTO LogPedidos (PedidoID, DataRegistro)
+    VALUES (NEW.PedidoID, NOW());
+END;
+
+
 
 CREATE TABLE Usuario (
  UsuarioID INT NOT NULL,
@@ -169,6 +178,9 @@ CREATE TABLE `pecas` (
   `EstadoEstoque` bit(2) NOT NULL
 
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+ALTER TABLE pecas
+ADD CONSTRAINT CHK_PrecoPositivo CHECK (Preco >= 0);
 
 --
 -- Extraindo dados da tabela `pecas`
@@ -499,6 +511,30 @@ CREATE TABLE Estoque (
  Estante VARCHAR(10),
  Estado BIT(2)
 );
+
+INSERT INTO Clientes (ClienteID, Nome, Email) VALUES
+(1, 'João', 'joao@example.com'),
+(2, 'Maria', 'maria@example.com');
+
+INSERT INTO Pedidos (PedidoID, ClienteID, Valor) VALUES
+(101, 1, 150.50),
+(102, 2, 200.75);
+
+INSERT INTO ItensPedido (ItemID, PedidoID, ProdutoID, Quantidade) VALUES
+(1, 101, 501, 2),
+(2, 102, 502, 3);
+
+ALTER TABLE Pedidos
+ADD CONSTRAINT CHK_ValorPedido CHECK (Valor > 0);
+
+CREATE TRIGGER RegistroPedido
+AFTER INSERT ON Pedidos
+FOR EACH ROW
+BEGIN
+    INSERT INTO LogPedidos (PedidoID, DataRegistro)
+    VALUES (NEW.PedidoID, NOW());
+END;
+
 
 ALTER TABLE Estoque ADD CONSTRAINT PK_Estoque PRIMARY KEY (PedidoID,PecaID,ItemEstoqueID,CatItemEstoqueID,CategoriaID);
 
