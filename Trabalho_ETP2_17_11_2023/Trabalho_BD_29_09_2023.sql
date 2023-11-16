@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 16/11/2023 às 01:14
+-- Tempo de geração: 16/11/2023 às 01:48
 -- Versão do servidor: 10.4.28-MariaDB
 -- Versão do PHP: 8.2.4
 
@@ -128,6 +128,18 @@ INSERT INTO `categorias` (`CategoriaID`, `Nome`) VALUES
 (9, 'Gabinete '),
 (10, 'Notebook'),
 (11, 'PC Pronto');
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura para tabela `logpedidos`
+--
+
+CREATE TABLE `logpedidos` (
+  `LogID` int(11) NOT NULL,
+  `PedidoID` int(11) DEFAULT NULL,
+  `DataRegistro` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -757,6 +769,17 @@ INSERT INTO `pedidos` (`PedidoID`, `UsuarioID`, `QuatItens`, `ValorTotal`) VALUE
 (101, 0, 0, 150.5),
 (102, 0, 0, 200.75);
 
+--
+-- Acionadores `pedidos`
+--
+DELIMITER $$
+CREATE TRIGGER `RegistroPedido` AFTER INSERT ON `pedidos` FOR EACH ROW BEGIN
+    INSERT INTO LogPedidos (PedidoID, DataRegistro)
+    VALUES (NEW.PedidoID, NOW());
+END
+$$
+DELIMITER ;
+
 -- --------------------------------------------------------
 
 --
@@ -795,6 +818,13 @@ ALTER TABLE `campos`
 --
 ALTER TABLE `categorias`
   ADD PRIMARY KEY (`CategoriaID`);
+
+--
+-- Índices de tabela `logpedidos`
+--
+ALTER TABLE `logpedidos`
+  ADD PRIMARY KEY (`LogID`),
+  ADD KEY `PedidoID` (`PedidoID`);
 
 --
 -- Índices de tabela `pecas`
@@ -842,6 +872,12 @@ ALTER TABLE `categorias`
   MODIFY `CategoriaID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
+-- AUTO_INCREMENT de tabela `logpedidos`
+--
+ALTER TABLE `logpedidos`
+  MODIFY `LogID` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT de tabela `pecas`
 --
 ALTER TABLE `pecas`
@@ -874,6 +910,12 @@ ALTER TABLE `usuarios`
 --
 ALTER TABLE `campos`
   ADD CONSTRAINT `CategoriaCampo` FOREIGN KEY (`CategoriaID`) REFERENCES `categorias` (`CategoriaID`);
+
+--
+-- Restrições para tabelas `logpedidos`
+--
+ALTER TABLE `logpedidos`
+  ADD CONSTRAINT `logpedidos_ibfk_1` FOREIGN KEY (`PedidoID`) REFERENCES `pedidos` (`PedidoID`);
 
 --
 -- Restrições para tabelas `pecas`
