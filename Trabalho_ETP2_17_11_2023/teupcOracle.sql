@@ -1,3 +1,5 @@
+REM   Script: Tentativa2_Deletar?:
+REM   e
 
 CREATE TABLE campos (
   CampoID number(10) NOT NULL,
@@ -234,7 +236,6 @@ INSERT INTO categorias (CategoriaID, Nome)
  UNION ALL
 
  SELECT 11, 'PC Pronto' FROM dual;
-
 
 CREATE TABLE pecas (
   PecaID number(10) NOT NULL,
@@ -1091,22 +1092,17 @@ INSERT INTO pecascampos (PecaCampoID, CampoID, CategoriaID, PecaID, DadoCampo, D
 
  SELECT 171, 11, 2, 30, '32GB', 'Placa-Mae Gigabyte B550M' FROM dual;
 
---
 ALTER TABLE campos
   ADD PRIMARY KEY (CampoID,CategoriaID);
-
 
 ALTER TABLE categorias
   ADD PRIMARY KEY (CategoriaID);
 
-
 ALTER TABLE pecas
   ADD PRIMARY KEY (PecaID,CategoriaID);
 
-
 ALTER TABLE pecascampos
   ADD PRIMARY KEY (PecaCampoID,PecaID,CategoriaID,CampoID);
-
 
 ALTER TABLE campos
   ADD CONSTRAINT CategoriaCampo FOREIGN KEY (CategoriaID) REFERENCES categorias (CategoriaID);
@@ -1114,13 +1110,14 @@ ALTER TABLE campos
 ALTER TABLE pecas
   ADD CONSTRAINT Categoria FOREIGN KEY (CategoriaID) REFERENCES categorias (CategoriaID);
 
-
 ALTER TABLE pecascampos 
-  ADD CONSTRAINT CampoID FOREIGN KEY (CampoID) REFERENCES campos (CampoID);
-  
+  ADD CONSTRAINT CampoID FOREIGN KEY (CampoID,CategoriaID) REFERENCES campos (CampoID,CategoriaID);
+
  ALTER TABLE pecascampos
    ADD CONSTRAINT CategoriaID FOREIGN KEY (CategoriaID) REFERENCES categorias (CategoriaID);
-  
+
  ALTER TABLE pecascampos
-   ADD CONSTRAINT PecaID FOREIGN KEY (PecaID) REFERENCES pecas (PecaID);
+   ADD CONSTRAINT PecaID FOREIGN KEY (PecaID,CategoriaID) REFERENCES pecas (PecaID,CategoriaID);
+
 COMMIT;
+
