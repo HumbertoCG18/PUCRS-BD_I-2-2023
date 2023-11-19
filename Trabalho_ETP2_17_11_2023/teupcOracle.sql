@@ -1,160 +1,17 @@
-CREATE TABLE campos (   
-  CampoID number(10) NOT NULL,   
-  CategoriaID number(10) NOT NULL,   
-  Nome varchar2(100) NOT NULL   
-)  
-;
+/*
+Humberto Corrêa Gomes (23102394)
+Eduardo Sperhacke Creidy Satt (23103324)
+Samuel Gonsioroski Fries (23102684)
+*/
 
-INSERT INTO campos (CampoID, CategoriaID, Nome)   
- SELECT 1, 1, 'CpuID' FROM dual   
- UNION ALL   
-   
- SELECT 2, 1, 'Frequencia' FROM dual   
- UNION ALL   
-   
- SELECT 3, 1, 'Nucleos' FROM dual   
- UNION ALL   
-   
- SELECT 4, 1, 'Threads' FROM dual   
- UNION ALL   
-   
- SELECT 5, 1, 'Socket' FROM dual   
- UNION ALL   
-   
- SELECT 6, 1, 'Consumo' FROM dual   
- UNION ALL   
-   
- SELECT 7, 2, 'Marca' FROM dual   
- UNION ALL   
-   
- SELECT 8, 2, 'Consumo' FROM dual   
- UNION ALL   
-   
- SELECT 9, 2, 'Socket' FROM dual   
- UNION ALL   
-   
- SELECT 10, 2, 'Formato' FROM dual   
- UNION ALL   
-   
- SELECT 11, 2, 'Memória Máxima' FROM dual   
- UNION ALL   
-   
- SELECT 12, 3, 'Velocidade' FROM dual   
- UNION ALL   
-   
- SELECT 13, 3, 'Tipo' FROM dual   
- UNION ALL   
-   
- SELECT 14, 3, 'Módulos' FROM dual   
- UNION ALL   
-   
- SELECT 15, 3, 'Capacidade' FROM dual   
- UNION ALL   
-   
- SELECT 16, 4, 'Conector' FROM dual   
- UNION ALL   
-   
- SELECT 17, 4, 'Formato' FROM dual   
- UNION ALL   
-   
- SELECT 18, 4, 'Capacidade' FROM dual   
- UNION ALL   
-   
- SELECT 19, 5, 'Série' FROM dual   
- UNION ALL   
-   
- SELECT 20, 5, 'Formato' FROM dual   
- UNION ALL   
-   
- SELECT 21, 5, 'Capacidade' FROM dual   
- UNION ALL   
-   
- SELECT 22, 5, 'Conector' FROM dual   
- UNION ALL   
-   
- SELECT 23, 6, 'Tipo' FROM dual   
- UNION ALL   
-   
- SELECT 24, 6, 'Tipo' FROM dual   
- UNION ALL   
-   
- SELECT 25, 6, 'RPM' FROM dual   
- UNION ALL   
-   
- SELECT 26, 6, 'Ruido' FROM dual   
- UNION ALL   
-   
- SELECT 27, 6, 'Socket' FROM dual   
- UNION ALL   
-   
- SELECT 28, 6, 'Tamanho' FROM dual   
- UNION ALL   
-   
- SELECT 29, 7, 'GpuID' FROM dual   
- UNION ALL   
-   
- SELECT 30, 7, 'Série' FROM dual   
- UNION ALL   
-   
- SELECT 31, 7, 'Chipset' FROM dual   
- UNION ALL   
-   
- SELECT 32, 7, 'VRAM' FROM dual   
- UNION ALL   
-   
- SELECT 33, 7, 'Marca' FROM dual   
- UNION ALL   
-   
- SELECT 34, 8, 'Série' FROM dual   
- UNION ALL   
-   
- SELECT 35, 8, 'Tipo' FROM dual   
- UNION ALL   
-   
- SELECT 36, 8, 'Modular' FROM dual   
- UNION ALL   
-   
- SELECT 37, 8, 'Certificado' FROM dual   
- UNION ALL   
-   
- SELECT 38, 8, 'Potencia' FROM dual   
- UNION ALL   
-   
- SELECT 39, 9, 'Tipo' FROM dual   
- UNION ALL   
-   
- SELECT 40, 9, 'Fonte Inclusa' FROM dual   
- UNION ALL   
-   
- SELECT 41, 9, 'Marca' FROM dual   
- UNION ALL   
-   
- SELECT 42, 10, 'Marca' FROM dual   
- UNION ALL   
-   
- SELECT 43, 10, 'CpuID' FROM dual   
- UNION ALL   
-   
- SELECT 44, 10, 'CPU' FROM dual   
- UNION ALL   
-   
- SELECT 45, 10, 'Núcleos' FROM dual   
- UNION ALL   
-   
- SELECT 46, 10, 'Threads' FROM dual   
- UNION ALL   
-   
- SELECT 47, 10, 'Frequência da CPU' FROM dual  
-;
 
-CREATE TABLE categorias (   
-  CategoriaID number(10) NOT NULL,   
-  Nome varchar2(100) NOT NULL   
-)   
-;
+CREATE TABLE categorias (    
+  CategoriaID NUMBER(10) NOT NULL,    
+  Nome VARCHAR(100) NOT NULL    
+);
 
 INSERT INTO categorias (CategoriaID, Nome)   
- SELECT 1, 'Processadoresrn' FROM dual   
+ SELECT 1, 'Processadores' FROM dual   
  UNION ALL   
    
  SELECT 2, 'Placa Mae ' FROM dual   
@@ -169,35 +26,18 @@ INSERT INTO categorias (CategoriaID, Nome)
  SELECT 5, 'HD' FROM dual   
  UNION ALL   
    
- SELECT 6, 'Cooler ' FROM dual   
- UNION ALL   
-   
- SELECT 7, 'Placa De Video ' FROM dual   
- UNION ALL   
-   
- SELECT 8, 'Fonte' FROM dual   
- UNION ALL   
-   
- SELECT 9, 'Gabinete ' FROM dual   
- UNION ALL   
-   
- SELECT 10, 'Notebook' FROM dual   
- UNION ALL   
-   
- SELECT 11, 'PC Pronto' FROM dual  
-;
+ SELECT 6, 'Cooler ' FROM dual;
 
 CREATE TABLE pecas (    
   PecaID NUMBER(10) NOT NULL,    
   CategoriaID NUMBER(10) NOT NULL,    
-  Nome VARCHAR2(100) NOT NULL,    
-  Imagem VARCHAR2(200) NOT NULL,    
+  Nome VARCHAR(100) NOT NULL,    
+  Imagem VARCHAR(200) NOT NULL,    
   Preco NUMBER NOT NULL,  
-  Link VARCHAR2(1000) NOT NULL,    
+  Link VARCHAR(1000) NOT NULL,    
   Estoque NUMBER(10) NOT NULL,    
   CONSTRAINT check_estoque_positive CHECK (Estoque >= 0)    
-)  
-;
+);
 
 INSERT INTO pecas (PecaID, CategoriaID, Nome, Imagem, Preco, Link, Estoque)   
  SELECT 1, 1, 'Processador Intel Core I5 9400', 'i594.jpg', 1414, 'https://www.kabum.com.br/produto/135650/processador-intel-core-i5-9400-cache-9mb-2-90ghz-4-10ghz-turbo-lga-1151-video-integrado-bx80684i59400', 5 FROM dual   
@@ -347,335 +187,162 @@ INSERT INTO pecas (PecaID, CategoriaID, Nome, Imagem, Preco, Link, Estoque)
  SELECT 49, 6, 'HYPER H410R com LED Vermelho', 'h410r.jpg', 130, 'https://www.kabum.com.br/produto/97264/cooler-para-processador-cooler-master-hyper-h410r-com-led-vermelho-rr-h410-20pk-r1?', 19 FROM dual   
  UNION ALL   
    
- SELECT 50, 6, 'Hyper H411R', 'h411r.jpg', 165, 'https://www.kabum.com.br/produto/96492/cooler-para-processador-cooler-master-amd-intel-hyper-h411r-rr-h411-20pw-r1?', 25 FROM dual  
-;
+ SELECT 50, 6, 'Hyper H411R', 'h411r.jpg', 165, 'https://www.kabum.com.br/produto/96492/cooler-para-processador-cooler-master-amd-intel-hyper-h411r-rr-h411-20pw-r1?', 25 FROM dual;
 
-CREATE TABLE pecascampos (   
-  PecaCampoID number(10) NOT NULL,   
-  CampoID number(10) NOT NULL,   
-  CategoriaID number(10) NOT NULL,   
-  PecaID number(10) NOT NULL,   
-  DadoCampo varchar2(100) NOT NULL,   
-  Descricao varchar2(100) NOT NULL   
-)  
-;
-
-INSERT INTO pecascampos (PecaCampoID, CampoID, CategoriaID, PecaID, DadoCampo, Descricao)   
- SELECT 1, 1, 1, 1, '1', 'Processador Intel Core I5 9400' FROM dual   
- UNION ALL   
-   
- SELECT 2, 2, 1, 1, '2.9 GHz', 'Processador Intel Core I5 9400' FROM dual   
- UNION ALL   
-   
- SELECT 3, 3, 1, 1, '6 Núcleos ', 'Processador Intel Core I5 9400' FROM dual   
- UNION ALL   
-   
- SELECT 4, 4, 1, 1, '12 Threads ', 'Processador Intel Core I5 9400' FROM dual   
- UNION ALL   
-   
- SELECT 5, 5, 1, 1, 'LGA 1151', 'Processador Intel Core I5 9400' FROM dual   
- UNION ALL   
-   
- SELECT 6, 6, 1, 1, '24 W', 'Processador Intel Core I5 9400' FROM dual   
- UNION ALL   
-   
- SELECT 7, 1, 1, 2, '1', 'Processador Intel Core i7-9700K Coffee Lake Refresh' FROM dual   
- UNION ALL   
-   
- SELECT 8, 2, 1, 2, '3.60 GHz', 'Processador Intel Core i7-9700K Coffee Lake Refresh' FROM dual   
- UNION ALL   
-   
- SELECT 9, 3, 1, 2, '8 Núcleos ', 'Processador Intel Core i7-9700K Coffee Lake Refresh' FROM dual   
- UNION ALL   
-   
- SELECT 10, 4, 1, 2, '16 Threads ', 'Processador Intel Core i7-9700K Coffee Lake Refresh' FROM dual   
- UNION ALL   
-   
- SELECT 11, 5, 1, 2, 'LGA 1151', 'Processador Intel Core i7-9700K Coffee Lake Refresh' FROM dual   
- UNION ALL   
-   
- SELECT 12, 6, 1, 2, '45 W', 'Processador Intel Core i7-9700K Coffee Lake Refresh' FROM dual   
- UNION ALL   
-   
- SELECT 13, 1, 1, 3, '1', 'Processador Intel Core i3-10100F' FROM dual   
- UNION ALL   
-   
- SELECT 14, 2, 1, 3, '3.60 GHz', 'Processador Intel Core i3-10100F' FROM dual   
- UNION ALL   
-   
- SELECT 15, 3, 1, 3, '4 Núcleos ', 'Processador Intel Core i3-10100F' FROM dual   
- UNION ALL   
-   
- SELECT 16, 4, 1, 3, '8 Threads ', 'Processador Intel Core i3-10100F' FROM dual   
- UNION ALL   
-   
- SELECT 17, 5, 1, 3, 'LGA 1200', 'Processador Intel Core i3-10100F' FROM dual   
- UNION ALL   
-   
- SELECT 18, 6, 1, 3, '65 W', 'Processador Intel Core i3-10100F' FROM dual   
- UNION ALL   
-   
- SELECT 19, 1, 1, 4, '1', 'Processador Intel Core i5-10400' FROM dual   
- UNION ALL   
-   
- SELECT 20, 2, 1, 4, '2.9 GHz', 'Processador Intel Core i5-10400' FROM dual   
- UNION ALL   
-   
- SELECT 21, 3, 1, 4, '6 Núcleos ', 'Processador Intel Core i5-10400' FROM dual   
- UNION ALL   
-   
- SELECT 22, 4, 1, 4, '12 Threads ', 'Processador Intel Core i5-10400' FROM dual   
- UNION ALL   
-   
- SELECT 23, 5, 1, 4, 'LGA 1200', 'Processador Intel Core i5-10400' FROM dual   
- UNION ALL   
-   
- SELECT 24, 6, 1, 4, '65 W', 'Processador Intel Core i5-10400' FROM dual   
- UNION ALL   
-   
- SELECT 25, 1, 1, 5, '1', 'Processador Intel Core i7-10700F' FROM dual   
- UNION ALL   
-   
- SELECT 26, 2, 1, 5, '2.9 GHz', 'Processador Intel Core i7-10700F' FROM dual   
- UNION ALL   
-   
- SELECT 27, 3, 1, 5, '8 Núcleos ', 'Processador Intel Core i7-10700F' FROM dual   
- UNION ALL   
-   
- SELECT 28, 4, 1, 5, '16 Threads', 'Processador Intel Core i7-10700F' FROM dual   
- UNION ALL   
-   
- SELECT 29, 5, 1, 5, 'LGA 1200', 'Processador Intel Core i7-10700F' FROM dual   
- UNION ALL   
-   
- SELECT 30, 6, 1, 5, '65 W', 'Processador Intel Core i7-10700F' FROM dual   
- UNION ALL   
-   
- SELECT 31, 1, 1, 6, '1', 'Processador Intel Core i5-11600KF' FROM dual   
- UNION ALL   
-   
- SELECT 32, 2, 1, 6, '3.9 GHz', 'Processador Intel Core i5-11600KF' FROM dual   
- UNION ALL   
-   
- SELECT 33, 3, 1, 6, '8 Núcleos ', 'Processador Intel Core i5-11600KF' FROM dual   
- UNION ALL   
-   
- SELECT 34, 4, 1, 6, '16 Threads', 'Processador Intel Core i5-11600KF' FROM dual   
- UNION ALL   
-   
- SELECT 35, 5, 1, 6, 'LGA 1200', 'Processador Intel Core i5-11600KF' FROM dual   
- UNION ALL   
-   
- SELECT 36, 6, 1, 6, '65 W', 'Processador Intel Core i5-11600KF' FROM dual   
- UNION ALL   
-   
- SELECT 37, 1, 1, 7, '1', 'Processador Intel Core i7-11700KF' FROM dual   
- UNION ALL   
-   
- SELECT 38, 2, 1, 7, '3.6 GHz', 'Processador Intel Core i7-11700KF' FROM dual   
- UNION ALL   
-   
- SELECT 39, 3, 1, 7, '8 Núcleos ', 'Processador Intel Core i7-11700KF' FROM dual   
- UNION ALL   
-   
- SELECT 40, 4, 1, 7, '16 Threads', 'Processador Intel Core i7-11700KF' FROM dual   
- UNION ALL   
-   
- SELECT 41, 5, 1, 7, 'LGA 1200', 'Processador Intel Core i7-11700KF' FROM dual   
- UNION ALL   
-   
- SELECT 42, 6, 1, 7, '125 W', 'Processador Intel Core i7-11700KF' FROM dual   
- UNION ALL   
-   
- SELECT 43, 1, 1, 8, '1', 'Processador Intel Core i9-11900KF ' FROM dual   
- UNION ALL   
-   
- SELECT 44, 2, 1, 8, '3.5 GHz', 'Processador Intel Core i9-11900KF ' FROM dual   
- UNION ALL   
-   
- SELECT 45, 3, 1, 8, '8 Núcleos ', 'Processador Intel Core i9-11900KF ' FROM dual   
- UNION ALL   
-   
- SELECT 46, 4, 1, 8, '16 Threads ', 'Processador Intel Core i9-11900KF ' FROM dual   
- UNION ALL   
-   
- SELECT 47, 5, 1, 8, 'LGA 1200', 'Processador Intel Core i9-11900KF ' FROM dual   
- UNION ALL   
-   
- SELECT 48, 6, 1, 8, '125 W', 'Processador Intel Core i9-11900KF ' FROM dual   
- UNION ALL   
-   
- SELECT 49, 1, 1, 9, '1', 'Processador Intel Core i7-12700K' FROM dual   
- UNION ALL   
-   
- SELECT 50, 2, 1, 9, '3.5 GHz', 'Processador Intel Core i7-12700K' FROM dual  
-;
-
-CREATE TABLE clientes (   
-    ClienteID NUMBER,   
-    Nome VARCHAR2(100),   
-    Email VARCHAR2(100),   
-    Telefone VARCHAR2(20),   
-    Endereco VARCHAR2(200)   
-)  
-;
-
-CREATE TABLE pedidos (   
-    PedidoID NUMBER,   
-    ClienteID NUMBER,   
-    PecaID NUMBER,   
-    CategoriaID NUMBER,   
-    Quantidade NUMBER,   
-    PrecoUnitario BINARY_DOUBLE,   
-    Total BINARY_DOUBLE,   
-    DataPedido DATE 
-) 
-;
+CREATE TABLE clientes (    
+    ClienteID NUMBER(10) NOT NULL,    
+    Nome VARCHAR(100) NOT NULL,    
+    Email VARCHAR(100) NOT NULL,    
+    Telefone VARCHAR(20) NOT NULL,    
+    Endereco VARCHAR(200) NOT NULL    
+);
 
 INSERT INTO clientes (ClienteID, Nome, Email, Telefone, Endereco)   
 SELECT 1, 'Roberto', 'roberto@gmail.com', '1234567890', 'Casa do caixaprego' FROM dual  
 UNION ALL  
-SELECT 2, 'Joana', 'joana@gmail.com', '1234567890', 'Casa do caixaprego' FROM dual 
-;
+SELECT 2, 'Joana', 'joana@gmail.com', '1234567890', 'Casa do caixaprego' FROM dual;
 
-CREATE OR REPLACE TRIGGER estoque_zero_trigger 
-BEFORE INSERT OR UPDATE ON pecas 
-FOR EACH ROW 
-BEGIN 
-    IF :NEW.Estoque = 0 THEN 
-        DBMS_OUTPUT.PUT_LINE('O estoque está zerado para o item ' || :NEW.Nome); 
-    END IF; 
-END; 
- 
 
-/
-
-CREATE TABLE logPedidos(     
-    LogID NUMBER, 
-    PedidoID NUMBER, 
-    ClienteID NUMBER, 
-    PecaID NUMBER,     
-    CategoriaID NUMBER,     
-    Quantidade NUMBER,     
-    DataPedido DATE 
-) 
-;
-
-ALTER TABLE logPedidos ADD (Estoque NUMBER) 
-;
-
-ALTER TABLE campos   
-  ADD PRIMARY KEY (CampoID,CategoriaID)
-;
-
-ALTER TABLE categorias   
-  ADD PRIMARY KEY (CategoriaID)  
-;
-
-ALTER TABLE pecas   
-  ADD PRIMARY KEY (PecaID,CategoriaID)  
-;
-
-ALTER TABLE pecascampos   
-  ADD PRIMARY KEY (PecaCampoID,PecaID,CategoriaID,CampoID)  
-;
-
-ALTER TABLE campos   
-  ADD CONSTRAINT CategoriaCampo FOREIGN KEY (CategoriaID) REFERENCES categorias (CategoriaID)  
-;
-
-ALTER TABLE pecas   
-  ADD CONSTRAINT Categoria FOREIGN KEY (CategoriaID) REFERENCES categorias (CategoriaID)  
-;
-
-ALTER TABLE pecascampos    
-  ADD CONSTRAINT CampoID FOREIGN KEY (CampoID,CategoriaID) REFERENCES campos (CampoID,CategoriaID)  
-;
-
- ALTER TABLE pecascampos   
-   ADD CONSTRAINT CategoriaID FOREIGN KEY (CategoriaID) REFERENCES categorias (CategoriaID)  
-;
-
- ALTER TABLE pecascampos   
-   ADD CONSTRAINT PecaID FOREIGN KEY (PecaID,CategoriaID) REFERENCES pecas (PecaID,CategoriaID)  
-;
+CREATE TABLE pedidos (   
+    PedidoID NUMBER(10) NOT NULL, 
+    ClienteID NUMBER(10) NOT NULL,    
+    PecaID NUMBER(10) NOT NULL,    
+    CategoriaID NUMBER(10) NOT NULL,    
+    Quantidade NUMBER(10) NOT NULL,    
+    PrecoUnitario BINARY_DOUBLE NOT NULL,    
+    Total BINARY_DOUBLE NOT NULL,    
+    DataPedido DATE NOT NULL 
+);
 
 INSERT INTO pedidos (PedidoID, ClienteID, PecaID, CategoriaID, Quantidade, PrecoUnitario, Total, DataPedido)  
-SELECT 1, 1, 1, 1, 3, 899, 899 * 3, TO_DATE('2023-11-18', 'YYYY-MM-DD') FROM dual
-;
+SELECT 1, 1, 1, 1, 3, 899, 899 * 3, TO_DATE('2023-11-18', 'YYYY-MM-DD') FROM dual;
+
+CREATE TABLE logPedidos(     
+    LogID NUMBER(10) NOT NULL, 
+    PedidoID NUMBER(10) NOT NULL, 
+    ClienteID NUMBER(10) NOT NULL, 
+    PecaID NUMBER(10) NOT NULL,     
+    CategoriaID NUMBER(10) NOT NULL,     
+    Quantidade NUMBER(10) NOT NULL,     
+    DataPedido DATE NOT NULL 
+);
+
+ALTER TABLE logPedidos ADD (Estoque NUMBER);
+
+ALTER TABLE categorias   
+ ADD PRIMARY KEY (CategoriaID);
+
+ALTER TABLE pecas   
+ ADD PRIMARY KEY (PecaID,CategoriaID);
+
+ALTER TABLE pecas   
+ ADD CONSTRAINT Categoria FOREIGN KEY (CategoriaID) REFERENCES categorias (CategoriaID);
 
 ALTER TABLE clientes  
- ADD PRIMARY KEY (ClienteID)  
-  
- 
-;
+ ADD PRIMARY KEY (ClienteID);
 
 ALTER TABLE pedidos 
- ADD PRIMARY KEY (PedidoID)  
- 
-;
-
-  ALTER TABLE logPedidos 
-   ADD CONSTRAINT LogPecaID FOREIGN KEY (PecaID,CategoriaID) REFERENCES pecas (PecaID,CategoriaID)  
-;
+ ADD PRIMARY KEY (PedidoID);
 
 ALTER TABLE logPedidos 
-  ADD PRIMARY KEY (LogID)  
-;
+ ADD CONSTRAINT LogPecaID FOREIGN KEY (PecaID,CategoriaID) REFERENCES pecas (PecaID,CategoriaID);
+
+ALTER TABLE logPedidos 
+ ADD PRIMARY KEY (LogID);
 
 ALTER TABLE pedidos 
-    ADD CONSTRAINT fkPedidoPeca FOREIGN KEY (PecaID, CategoriaID) REFERENCES pecas(PecaID, CategoriaID) 
-;
+ ADD CONSTRAINT fkPedidoPeca FOREIGN KEY (PecaID, CategoriaID) REFERENCES pecas(PecaID, CategoriaID);
 
 ALTER TABLE pedidos 
-    ADD CONSTRAINT fkClientesPedidos FOREIGN KEY (ClienteID) REFERENCES clientes(ClienteID)
-;
+ ADD CONSTRAINT fkClientesPedidos FOREIGN KEY (ClienteID) REFERENCES clientes(ClienteID);
 
-CREATE OR REPLACE TRIGGER calcular_preco_total 
-BEFORE INSERT ON pedidos 
-FOR EACH ROW 
-DECLARE 
-    Preco NUMBER; 
-BEGIN 
-    SELECT Preco INTO Preco FROM pecas WHERE PecaID = :NEW.PecaID AND CategoriaID = :NEW.CategoriaID; 
-    :NEW.PrecoUnitario := Preco; 
-    :NEW.Total := :NEW.Quantidade * Preco; 
-EXCEPTION 
-    WHEN NO_DATA_FOUND THEN 
-        :NEW.PrecoUnitario := NULL; 
-        :NEW.Total := NULL; 
-END;
-/
- 
-CREATE OR REPLACE TRIGGER estoque_zero_trigger  
-BEFORE INSERT OR UPDATE ON pecas  
+CREATE OR REPLACE TRIGGER calcular_preco_total  
+BEFORE INSERT ON pedidos  
 FOR EACH ROW  
+DECLARE  
+    Preco NUMBER;  
 BEGIN  
-    IF :NEW.Estoque = 0 THEN  
-        DBMS_OUTPUT.PUT_LINE('O estoque está zerado para o item ' || :NEW.Nome);  
-    END IF;  
+    SELECT Preco INTO Preco FROM pecas WHERE PecaID = :NEW.PecaID AND CategoriaID = :NEW.CategoriaID;  
+    :NEW.PrecoUnitario := Preco;  
+    :NEW.Total := :NEW.Quantidade * Preco;  
+EXCEPTION  
+    WHEN NO_DATA_FOUND THEN  
+        :NEW.PrecoUnitario := NULL;  
+        :NEW.Total := NULL;  
 END; 
 /
- 
-CREATE OR REPLACE TRIGGER RegistroPedido 
-BEFORE INSERT ON logPedidos 
-FOR EACH ROW 
-DECLARE 
-    v_pode_registrar NUMBER; 
-    SEQ_PEDIDO  NUMBER;
-BEGIN 
-    SELECT Estoque INTO v_pode_registrar FROM pecas WHERE PecaID = :NEW.PecaID AND CategoriaID = :NEW.CategoriaID; 
- 
-    IF v_pode_registrar >= :NEW.Quantidade THEN 
-        :NEW.PedidoID := SEQ_PEDIDO;
-        :NEW.DataPedido := SYSDATE; 
-    ELSE 
-        RAISE_APPLICATION_ERROR(-20001, 'Estoque insuficiente para esta peça!'); 
-    END IF; 
-EXCEPTION 
-    WHEN NO_DATA_FOUND THEN 
-        NULL; 
-END;
+
+CREATE OR REPLACE TRIGGER estoque_zero_trigger   
+BEFORE INSERT OR UPDATE ON pecas   
+FOR EACH ROW   
+BEGIN   
+    IF :NEW.Estoque = 0 THEN   
+        DBMS_OUTPUT.PUT_LINE('O estoque está zerado para o item ' || :NEW.Nome);   
+    END IF;   
+END;  
 /
 
-CREATE SEQUENCE SEQ_PEDIDO START WITH 1 INCREMENT BY 1 ;
+CREATE OR REPLACE TRIGGER RegistroPedido  
+BEFORE INSERT ON logPedidos  
+FOR EACH ROW  
+DECLARE  
+    v_pode_registrar NUMBER;  
+    SEQ_PEDIDO  NUMBER; 
+BEGIN  
+    SELECT Estoque INTO v_pode_registrar FROM pecas WHERE PecaID = :NEW.PecaID AND CategoriaID = :NEW.CategoriaID;  
+  
+    IF v_pode_registrar >= :NEW.Quantidade THEN  
+        :NEW.PedidoID := SEQ_PEDIDO; 
+        :NEW.DataPedido := SYSDATE;  
+    ELSE  
+        RAISE_APPLICATION_ERROR(-20001, 'Estoque insuficiente para esta peça!');  
+    END IF;  
+EXCEPTION  
+    WHEN NO_DATA_FOUND THEN  
+        NULL;  
+END; 
+/
+
+CREATE SEQUENCE SEQ_PEDIDO START WITH 1 INCREMENT BY 1;
+
+/*
+Consulta 1:
+SELECT p.Nome AS Nome_Peca, p.Preco, c.Nome AS Nome_Categoria
+FROM pecas p
+JOIN categorias c ON p.CategoriaID = c.CategoriaID
+WHERE p.Preco > 1000
+ORDER BY p.Preco DESC;
+
+Esta consulta realiza uma junção entre as tabelas pecas e categorias, filtrando peças com preço superior a 1000 e exibindo o nome da peça, seu preço e o nome da categoria correspondente. Ordena os resultados pelo preço das peças em ordem decrescente.
+
+----
+Consulta 2:
+SELECT p.Nome AS Nome_Peca, c.Nome AS Nome_Categoria
+FROM pecas p
+JOIN categorias c ON p.CategoriaID = c.CategoriaID
+WHERE p.Estoque >= 5
+
+UNION
+
+SELECT p.Nome AS Nome_Peca, c.Nome AS Nome_Categoria
+FROM pecas p
+JOIN categorias c ON p.CategoriaID = c.CategoriaID
+WHERE p.Preco < 1000
+ORDER BY Nome_Peca;
+
+Essa consulta utiliza o operador UNION para combinar os resultados de duas consultas diferentes. A primeira parte da consulta seleciona peças com estoque superior ou igual a 5, enquanto a segunda parte seleciona peças com preço inferior a 1000. Os resultados são combinados usando UNION e ordenados pelo nome da peça.
+
+----
+Consulta 3:
+SELECT ClienteID, PedidoID
+FROM pedidos
+
+MINUS
+
+SELECT ClienteID, PedidoID
+FROM logPedidos;
+
+Esta consulta usará operadores de conjuntos para encontrar registros que estejam em uma tabela e não na outra, usando MINUS.
+
+
+*/
