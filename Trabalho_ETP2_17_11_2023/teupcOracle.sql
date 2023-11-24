@@ -1,4 +1,3 @@
-
 CREATE TABLE campos (
   CampoID number(10) NOT NULL,
   CategoriaID number(10) NOT NULL,
